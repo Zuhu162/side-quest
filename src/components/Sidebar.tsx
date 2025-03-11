@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
@@ -7,6 +7,7 @@ import {
   FileText, Sparkles, Github, Linkedin, Mail
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useMediaQuery } from "@/hooks/use-mobile";
 
 type NavItemProps = {
   icon: React.ReactNode;
@@ -43,22 +44,31 @@ const NavItem = ({ icon, label, to, isNew, isExpanded }: NavItemProps) => (
 
 export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const [isSidebarHidden, setIsSidebarHidden] = useState(false);
 
-  const sidebarWidth = isExpanded ? "w-64" : "w-16";
-  const mainContentMargin = isExpanded ? "ml-64" : "ml-16";
+  useEffect(() => {
+    if (isMobile) {
+      setIsExpanded(false);
+      setIsSidebarHidden(true);
+    } else {
+      setIsSidebarHidden(false);
+    }
+  }, [isMobile]);
   
   // Main sidebar variants
   const sidebarVariants = {
-    expanded: { width: 256 },
-    collapsed: { width: 64 }
+    expanded: { width: 256, x: 0 },
+    collapsed: { width: 64, x: 0 },
+    hidden: { x: "-100%" }
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen relative">
       <motion.div 
-        className={`fixed inset-y-0 left-0 z-40 flex flex-col bg-sidebar border-r border-border ${sidebarWidth} transition-all duration-300`}
-        initial={isExpanded ? "expanded" : "collapsed"}
-        animate={isExpanded ? "expanded" : "collapsed"}
+        className={`fixed inset-y-0 left-0 z-40 flex flex-col bg-sidebar border-r border-border transition-all duration-300 ${isSidebarHidden ? 'translate-x-[-100%]' : ''}`}
+        initial={isExpanded ? "expanded" : (isSidebarHidden ? "hidden" : "collapsed")}
+        animate={isExpanded ? "expanded" : (isSidebarHidden ? "hidden" : "collapsed")}
         variants={sidebarVariants}
       >
         {/* Sidebar header */}
@@ -158,8 +168,17 @@ export default function Sidebar() {
         </div>
       </motion.div>
 
-      {/* This div takes up the same space as the sidebar to push content over */}
-      <div className={`${sidebarWidth} transition-all duration-300`}></div>
+      {/* Mobile sidebar toggle */}
+      {isMobile && isSidebarHidden && (
+        <Button 
+          variant="secondary" 
+          size="icon" 
+          onClick={() => setIsSidebarHidden(false)}
+          className="fixed top-4 left-4 z-50 rounded-full shadow-lg"
+        >
+          <Menu className="h-5 w-5" />
+        </Button>
+      )}
     </div>
   );
 }

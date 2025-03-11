@@ -9,8 +9,8 @@ export default function Experience() {
   const responseText = "Here's a summary of my professional journey and the experiences that have shaped my career.";
 
   return (
-    <div className="container py-8">
-      <div className="max-w-3xl mx-auto mb-8">
+    <div className="container">
+      <div className="max-w-3xl mx-auto space-y-4">
         <div className="bg-card p-4 rounded-xl text-left">
           <div className="text-sm">
             <span className="font-semibold">User: </span>
@@ -18,7 +18,7 @@ export default function Experience() {
           </div>
         </div>
         
-        <div className="bg-secondary/30 p-4 rounded-xl text-left mt-4">
+        <div className="bg-secondary/30 p-4 rounded-xl text-left">
           <TypingAnimation 
             text={responseText} 
             onComplete={() => setTypingComplete(true)}
@@ -31,7 +31,7 @@ export default function Experience() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-3xl mx-auto mt-12 space-y-10"
+          className="max-w-3xl mx-auto mt-8 space-y-8"
         >
           <div className="relative border-l border-border pl-6 ml-3">
             <div className="absolute -left-3 top-0 w-6 h-6 bg-secondary rounded-full flex items-center justify-center">

@@ -34,10 +34,10 @@ export default function MainLayout() {
   const [searchValue, setSearchValue] = useState("");
 
   return (
-    <div className="h-screen flex flex-col bg-background">
+    <div className="h-screen flex bg-background">
       <Sidebar />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col w-full">
         {/* Top navigation */}
         <header className="border-b border-border h-14 flex justify-end items-center px-4 sm:px-6">
           <div className="flex-1 max-w-md mr-4">
@@ -75,9 +75,28 @@ export default function MainLayout() {
           <ThemeToggle />
         </header>
 
-        {/* Main content */}
-        <main className="flex-1 overflow-y-auto">
-          <Outlet />
+        {/* Main content with fixed height and scrollable */}
+        <main className="flex-1 flex flex-col relative">
+          <div className="flex-1 overflow-y-auto pt-8 pb-24">
+            <Outlet />
+          </div>
+          
+          {/* Fixed chat input at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-center">
+            <div className="w-full max-w-3xl bg-background border border-border rounded-lg">
+              <div className="flex items-center px-3 py-2">
+                <input
+                  type="text"
+                  placeholder="Send a message..."
+                  className="flex-1 bg-transparent border-0 focus:outline-none text-sm"
+                  disabled
+                />
+                <Button size="sm" className="ml-2" disabled>
+                  Send
+                </Button>
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     </div>
