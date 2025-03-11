@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -7,7 +6,7 @@ import {
   FileText, Sparkles, Github, Linkedin, Mail
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useMediaQuery } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type NavItemProps = {
   icon: React.ReactNode;
@@ -44,7 +43,7 @@ const NavItem = ({ icon, label, to, isNew, isExpanded }: NavItemProps) => (
 
 export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useIsMobile();
   const [isSidebarHidden, setIsSidebarHidden] = useState(false);
 
   useEffect(() => {
@@ -56,7 +55,6 @@ export default function Sidebar() {
     }
   }, [isMobile]);
   
-  // Main sidebar variants
   const sidebarVariants = {
     expanded: { width: 256, x: 0 },
     collapsed: { width: 64, x: 0 },
@@ -66,12 +64,13 @@ export default function Sidebar() {
   return (
     <div className="flex h-screen relative">
       <motion.div 
-        className={`fixed inset-y-0 left-0 z-40 flex flex-col bg-sidebar border-r border-border transition-all duration-300 ${isSidebarHidden ? 'translate-x-[-100%]' : ''}`}
+        className={`fixed inset-y-0 left-0 z-40 flex flex-col bg-sidebar border-r border-border transition-all duration-300 ${
+          isSidebarHidden ? '-translate-x-full' : ''
+        }`}
         initial={isExpanded ? "expanded" : (isSidebarHidden ? "hidden" : "collapsed")}
         animate={isExpanded ? "expanded" : (isSidebarHidden ? "hidden" : "collapsed")}
         variants={sidebarVariants}
       >
-        {/* Sidebar header */}
         <div className="flex items-center justify-between p-4 border-b border-border">
           {isExpanded && <h2 className="text-lg font-semibold">Main Menu</h2>}
           <Button 
@@ -84,7 +83,6 @@ export default function Sidebar() {
           </Button>
         </div>
 
-        {/* Navigation */}
         <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
           <NavItem 
             icon={<Home className="h-5 w-5" />} 
@@ -93,7 +91,6 @@ export default function Sidebar() {
             isExpanded={isExpanded} 
           />
 
-          {/* Section divider */}
           {isExpanded && (
             <div className="pt-4 pb-2">
               <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
@@ -135,7 +132,6 @@ export default function Sidebar() {
           />
         </div>
 
-        {/* Footer */}
         <div className="p-4 border-t border-border">
           {isExpanded ? (
             <div className="text-sm text-muted-foreground">
@@ -168,7 +164,6 @@ export default function Sidebar() {
         </div>
       </motion.div>
 
-      {/* Mobile sidebar toggle */}
       {isMobile && isSidebarHidden && (
         <Button 
           variant="secondary" 
