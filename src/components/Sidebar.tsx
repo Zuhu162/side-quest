@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -48,10 +49,10 @@ export default function Sidebar() {
 
   useEffect(() => {
     if (isMobile) {
-      setIsExpanded(false);
-      setIsSidebarHidden(true);
+      setIsExpanded(true); // Always expanded on mobile when visible
+      setIsSidebarHidden(true); // Hidden by default on mobile
     } else {
-      setIsSidebarHidden(false);
+      setIsSidebarHidden(false); // Always visible on desktop
     }
   }, [isMobile]);
   
@@ -61,25 +62,43 @@ export default function Sidebar() {
     hidden: { x: "-100%" }
   };
 
+  const handleNavLinkClick = () => {
+    if (isMobile) {
+      setIsSidebarHidden(true);
+    }
+  };
+
+  const handleOverlayClick = () => {
+    if (isMobile) {
+      setIsSidebarHidden(true);
+    }
+  };
+
   return (
     <div className="flex h-screen relative">
+      {/* Backdrop overlay for mobile */}
+      {isMobile && !isSidebarHidden && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-30 backdrop-blur-sm" 
+          onClick={handleOverlayClick}
+        />
+      )}
+      
       <motion.div 
-        className={`fixed inset-y-0 left-0 z-40 flex flex-col bg-sidebar border-r border-border transition-all duration-300 ${
-          isSidebarHidden ? '-translate-x-full' : ''
-        }`}
-        initial={isExpanded ? "expanded" : (isSidebarHidden ? "hidden" : "collapsed")}
-        animate={isExpanded ? "expanded" : (isSidebarHidden ? "hidden" : "collapsed")}
+        className={`fixed inset-y-0 left-0 z-40 flex flex-col bg-sidebar border-r border-border transition-all duration-300`}
+        initial={isMobile ? "hidden" : (isExpanded ? "expanded" : "collapsed")}
+        animate={isSidebarHidden ? "hidden" : (isExpanded ? "expanded" : "collapsed")}
         variants={sidebarVariants}
       >
         <div className="flex items-center justify-between p-4 border-b border-border">
-          {isExpanded && <h2 className="text-lg font-semibold">Main Menu</h2>}
+          {(isExpanded || isMobile) && <h2 className="text-lg font-semibold">Main Menu</h2>}
           <Button 
             variant="ghost" 
             size="icon" 
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={() => isMobile ? setIsSidebarHidden(true) : setIsExpanded(!isExpanded)}
             className="rounded-full"
           >
-            {isExpanded ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            <X className="h-5 w-5" />
           </Button>
         </div>
 
@@ -88,10 +107,10 @@ export default function Sidebar() {
             icon={<Home className="h-5 w-5" />} 
             label="Home" 
             to="/" 
-            isExpanded={isExpanded} 
+            isExpanded={isExpanded || isMobile} 
           />
 
-          {isExpanded && (
+          {(isExpanded || isMobile) && (
             <div className="pt-4 pb-2">
               <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                 CONVERSATIONS
@@ -99,41 +118,55 @@ export default function Sidebar() {
             </div>
           )}
 
-          <NavItem 
-            icon={<User className="h-5 w-5" />} 
-            label="About Me" 
-            to="/about" 
-            isExpanded={isExpanded} 
-          />
-          <NavItem 
-            icon={<Code className="h-5 w-5" />} 
-            label="Projects" 
-            to="/projects" 
-            isExpanded={isExpanded} 
-          />
-          <NavItem 
-            icon={<Briefcase className="h-5 w-5" />} 
-            label="Experience" 
-            to="/experience" 
-            isExpanded={isExpanded} 
-          />
-          <NavItem 
-            icon={<FileText className="h-5 w-5" />} 
-            label="Blogs" 
-            to="/blogs" 
-            isExpanded={isExpanded} 
-          />
-          <NavItem 
-            icon={<Sparkles className="h-5 w-5" />} 
-            label="Make me a SE portfolio" 
-            to="/portfolio-generator" 
-            isExpanded={isExpanded}
-            isNew={true}
-          />
+          <div onClick={handleNavLinkClick}>
+            <NavItem 
+              icon={<User className="h-5 w-5" />} 
+              label="About Me" 
+              to="/about" 
+              isExpanded={isExpanded || isMobile} 
+            />
+          </div>
+          
+          <div onClick={handleNavLinkClick}>
+            <NavItem 
+              icon={<Code className="h-5 w-5" />} 
+              label="Projects" 
+              to="/projects" 
+              isExpanded={isExpanded || isMobile} 
+            />
+          </div>
+          
+          <div onClick={handleNavLinkClick}>
+            <NavItem 
+              icon={<Briefcase className="h-5 w-5" />} 
+              label="Experience" 
+              to="/experience" 
+              isExpanded={isExpanded || isMobile} 
+            />
+          </div>
+          
+          <div onClick={handleNavLinkClick}>
+            <NavItem 
+              icon={<FileText className="h-5 w-5" />} 
+              label="Blogs" 
+              to="/blogs" 
+              isExpanded={isExpanded || isMobile} 
+            />
+          </div>
+          
+          <div onClick={handleNavLinkClick}>
+            <NavItem 
+              icon={<Sparkles className="h-5 w-5" />} 
+              label="Make me a SE portfolio" 
+              to="/portfolio-generator" 
+              isExpanded={isExpanded || isMobile}
+              isNew={true}
+            />
+          </div>
         </div>
 
         <div className="p-4 border-t border-border">
-          {isExpanded ? (
+          {(isExpanded || isMobile) ? (
             <div className="text-sm text-muted-foreground">
               <p className="mb-2">Connect with me</p>
               <div className="flex space-x-2">
