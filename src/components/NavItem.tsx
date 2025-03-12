@@ -5,7 +5,7 @@ type NavItemProps = {
   icon: React.ReactNode;
   label: string;
   to: string;
-  badge?: boolean;
+  badge?: string;
   onClick?: () => void;
   isExpanded: boolean;
 };
@@ -37,7 +37,7 @@ export const NavItem = ({
           {label}
           {badge && (
             <span className="ml-2 bg-blue-500 text-white text-xs px-1.5 py-0.5 rounded-full">
-              Old
+              {badge}
             </span>
           )}
         </span>

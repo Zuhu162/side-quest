@@ -15,8 +15,9 @@ export default function Home() {
           className="absolute -top-28 right-0 md:right-0 max-w-xs">
           <div className="bg-secondary p-4 rounded-xl text-sm text-left">
             <p>
-              Welcome to my portfolio! Since AI is going to take over my job,
-              I'm mimicking an AI chatbot. Shhh 🤫 Don't tell anyone.
+              Welcome to my portfolio! Since AI is coming for my job anyway, I
+              figured I’d get ahead of the curve by pretending to be one. Shhh…
+              🤫 Don’t tell anyone.
             </p>
           </div>
         </motion.div>

@@ -54,16 +54,15 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-    --sidebar-background: 40 30% 96%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 40 20% 92%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 40 30% 90%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 40 30% 80%; /* Creamy, slightly darker background */
+    --sidebar-foreground: 40 20% 25%; /* Darker cream for text */
+    --sidebar-primary: 40 40% 50%; /* Medium creamy tone for primary elements */
+    --sidebar-primary-foreground: 0 0% 98%; /* Light text for primary elements */
+    --sidebar-accent: 40 30% 70%; /* Lighter creamy tone for accents */
+    --sidebar-accent-foreground: 40 20% 25%; /* Darker cream for accent text */
+    --sidebar-border: 40 20% 60%; /* Darker creamy tone for borders */
+    --sidebar-ring: 40 40% 50%; /* Medium creamy tone for focus rings */
   }
-
   * {
     @apply border-border selection:bg-white/10 selection:text-white;
   }

@@ -1,9 +1,12 @@
-
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { useNavigate } from "react-router-dom";
 
 interface ConversationProps {
@@ -27,10 +30,6 @@ const searchSuggestions = [
     label: "What technologies do you use?",
     path: "/about",
   },
-  {
-    label: "How can I contact you?",
-    path: "/about",
-  },
 ];
 
 export default function ConversationInterface({ children }: ConversationProps) {
@@ -44,10 +43,8 @@ export default function ConversationInterface({ children }: ConversationProps) {
   return (
     <div className="flex flex-col h-full relative">
       {/* Conversation area */}
-      <div className="flex-1 overflow-y-auto py-8 px-4 sm:px-6">
-        {children}
-      </div>
-      
+      <div className="flex-1 overflow-y-auto py-8 px-4 sm:px-6">{children}</div>
+
       {/* Fixed chat input at bottom */}
       <div className="sticky bottom-0 left-0 right-0 p-4 flex justify-center bg-gradient-to-t from-background via-background/95 to-transparent pb-6">
         <div className="w-full max-w-3xl">
@@ -66,15 +63,16 @@ export default function ConversationInterface({ children }: ConversationProps) {
                 />
               </div>
             </PopoverTrigger>
-            <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="center">
+            <PopoverContent
+              className="w-[var(--radix-popover-trigger-width)] p-0"
+              align="center">
               <div className="py-2">
                 {searchSuggestions.map((suggestion, index) => (
                   <Button
                     key={index}
                     variant="ghost"
                     className="w-full justify-start text-left px-3 py-2 text-sm"
-                    onClick={() => handleSuggestionClick(suggestion.path)}
-                  >
+                    onClick={() => handleSuggestionClick(suggestion.path)}>
                     {suggestion.label}
                   </Button>
                 ))}

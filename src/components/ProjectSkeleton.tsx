@@ -1,9 +1,8 @@
-
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProjectSkeleton() {
   return (
-    <div className="border border-border rounded-xl overflow-hidden bg-card/80">
+    <div className="border border-border min-h-[550px] rounded-xl overflow-hidden bg-card/80">
       <Skeleton className="h-48 w-full" />
       <div className="p-6">
         <Skeleton className="h-6 w-3/4 mb-2" />

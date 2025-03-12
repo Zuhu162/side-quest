@@ -6,7 +6,7 @@ import TechBadge from "@/components/TechBadge";
 export default function About() {
   const [typingComplete, setTypingComplete] = useState(false);
   const responseText =
-    "Hello! I'm Zuhayer, a software engineer passionate about building exceptional web applications and exploring new technologies.";
+    "Ah, an existential question! But let's keep it simple—I’m Zuhayer, a developer, problem solver, and occasional meme enthusiast. Here’s a bit about me...";
 
   const skillsData = [
     { name: "JavaScript (ES6)", color: "bg-yellow-500" },
@@ -30,11 +30,8 @@ export default function About() {
     <div className="container py-8">
       <div className="max-w-3xl mx-auto mb-8">
         <div className="user-bubble">
-          <div className="text-sm">
-            <span className="font-semibold">User: </span>
-            <span className="text-muted-foreground">
-              Tell me about yourself
-            </span>
+          <div className="text-sm text-right">
+            <span className="text-muted-foreground">Who are you?</span>
           </div>
         </div>
 
@@ -66,17 +63,31 @@ export default function About() {
             </a>
             <div>
               <p className="text-muted-foreground mb-2">
-                I'm a final year software engineering student from UTM
+                I'm a final-year student at Universiti Teknologi Malaysia (UTM),
+                currently surviving on coffee, deadlines, and the occasional
+                burst of productivity.
               </p>
-              <p className="text-muted-foreground">
-                I'm a skilled software engineer with expertise in frontend and
-                backend development. I specialize in building responsive web
-                applications using modern JavaScript frameworks.
+              <p className="text-muted-foreground mb-2">
+                I build things for the web and mobile—sometimes they even work
+                on the first try. My interests include full-stack development,
+                debugging my own mistakes, and pretending to understand
+                documentation on the first read. When I’m not coding, I’m
+                probably:
               </p>
+              <div className="text-muted-foreground">
+                <li>ChatGPTing or Googling “why is my code not working”</li>
+                <li>
+                  ChatGPTing or Googling “why is my code working” (which is
+                  scarier)
+                </li>
+                <li>
+                  Working on side projects that I promise to finish someday
+                </li>
+              </div>
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold mt-6">Skills</h2>
+          <h2 className="text-2xl font-bold mt-6">Tool Set</h2>
           <div className="flex flex-wrap">
             {skillsData.map((skill, index) => (
               <span

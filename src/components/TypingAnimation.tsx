@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 
 interface TypingAnimationProps {
@@ -10,7 +9,7 @@ interface TypingAnimationProps {
 
 export default function TypingAnimation({
   text,
-  typingSpeed = 30,
+  typingSpeed = 10,
   onComplete,
   className = "",
 }: TypingAnimationProps) {

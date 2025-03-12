@@ -13,16 +13,39 @@ import {
   Github,
   Linkedin,
   Mail,
+  Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { NavItem } from "./NavItem";
+import { toast } from "sonner";
 
 export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
   const isMobile = useIsMobile();
   const [isSidebarHidden, setIsSidebarHidden] = useState(false);
   const navigate = useNavigate();
+
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    const email = "zuhayersiddique162@gmail.com"; // Your email address
+
+    // Copy email to clipboard
+    navigator.clipboard
+      .writeText(email)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+
+        // Show Sonner toast
+        toast.success(`Email: ${email} copied to your clipboard! ✔`);
+      })
+      .catch((error) => {
+        console.error("Failed to copy email:", error);
+        toast.error("Failed to copy email."); // Show error toast
+      });
+  };
 
   useEffect(() => {
     if (isMobile) {
@@ -61,8 +84,8 @@ export default function Sidebar() {
           variant="secondary"
           size="icon"
           onClick={() => setIsSidebarHidden(false)}
-          className="fixed top-4 left-4 z-50 rounded-full shadow-lg">
-          <Menu className="h-5 w-5" />
+          className="fixed top-20 left-4 z-50 rounded-full shadow-lg">
+          <Menu className="h-15 w-15" />
         </Button>
       )}
 
@@ -75,14 +98,14 @@ export default function Sidebar() {
       )}
 
       <motion.div
-        className="fixed inset-y-0 left-0 z-40 flex flex-col bg-sidebar border-r border-border transition-all duration-300"
+        className="fixed inset-y-0 left-0 z-40 flex flex-col overflow-x-hidden bg-sidebar border-r border-border transition-all duration-300"
         initial={isMobile ? { x: "-100%" } : { width: 256 }}
         animate={
           isMobile
             ? { x: isSidebarHidden ? "-100%" : 0, width: 256 }
             : { x: 0, width: isExpanded ? 256 : 70 }
         }>
-        <div className="flex items-center justify-between p-4 border-b border-border">
+        <div className="flex items-center justify-between p-3 border-b border-border">
           <div className="w-full flex justify-center">
             <button onClick={toggleSidebar}>
               <img className="h-25 w-25" src="/Logo.svg"></img>
@@ -150,10 +173,10 @@ export default function Sidebar() {
 
           <NavItem
             icon={<Sparkles className="h-5 w-5" />}
-            label="Make me a SE portfolio"
-            to="/portfolio-generator"
+            label="Throwback"
+            to="/old-portfolios"
             onClick={handleNavLinkClick}
-            badge={true}
+            badge="Bonus"
             isExpanded={isExpanded}
           />
         </div>
@@ -163,27 +186,55 @@ export default function Sidebar() {
             <div className="text-sm">
               <p className="mb-2">Connect with me</p>
               <div className="flex">
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <Github className="h-5 w-5" />
-                </Button>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <Linkedin className="h-5 w-5" />
-                </Button>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <Mail className="h-5 w-5" />
+                <a target="_blank" href="https://github.com/Zuhu162">
+                  <Button variant="ghost" size="icon" className="rounded-full">
+                    <Github className="h-5 w-5" />
+                  </Button>
+                </a>
+                <a
+                  target="_blank"
+                  href="https://www.linkedin.com/in/zuhayer-siddique/">
+                  <Button variant="ghost" size="icon" className="rounded-full">
+                    <Linkedin className="h-5 w-5" />
+                  </Button>
+                </a>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full"
+                  onClick={handleCopyEmail}>
+                  {copied ? (
+                    <Check className="h-5 w-5" />
+                  ) : (
+                    <Mail className="h-5 w-5" />
+                  )}
                 </Button>
               </div>
             </div>
           ) : (
             <div className="flex flex-col items-center space-y-2">
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Github className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Linkedin className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Mail className="h-5 w-5" />
+              <a target="_blank" href="https://github.com/Zuhu162">
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <Github className="h-5 w-5" />
+                </Button>
+              </a>
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/zuhayer-siddique/">
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <Linkedin className="h-5 w-5" />
+                </Button>
+              </a>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full"
+                onClick={handleCopyEmail}>
+                {copied ? (
+                  <Check className="h-5 w-5" />
+                ) : (
+                  <Mail className="h-5 w-5" />
+                )}
               </Button>
             </div>
           )}
