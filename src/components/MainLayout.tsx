@@ -41,8 +41,14 @@ export default function MainLayout() {
       });
     }
 
+    // Set up resize event listener to handle window resize
+    window.addEventListener('resize', checkSidebarState);
+
     // Clean up
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', checkSidebarState);
+    };
   }, []);
 
   return (

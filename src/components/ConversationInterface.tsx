@@ -66,7 +66,7 @@ export default function ConversationInterface({ children }: ConversationProps) {
                 />
               </div>
             </PopoverTrigger>
-            <PopoverContent className="w-full p-0 max-w-md" align="center">
+            <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="center">
               <div className="py-2">
                 {searchSuggestions.map((suggestion, index) => (
                   <Button

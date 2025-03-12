@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import TypingAnimation from "@/components/TypingAnimation";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Calendar } from "lucide-react";
+import { Clock, Calendar, Image } from "lucide-react";
 
 export default function Blogs() {
   const [typingComplete, setTypingComplete] = useState(false);
@@ -17,6 +17,7 @@ export default function Blogs() {
       date: "May 15, 2023",
       readTime: "6 min read",
       categories: ["React", "Performance"],
+      image: "photo-1488590528505-98d2b5aba04b"
     },
     {
       id: 2,
@@ -25,6 +26,7 @@ export default function Blogs() {
       date: "April 3, 2023",
       readTime: "8 min read",
       categories: ["AI", "Technology Trends"],
+      image: "photo-1518770660439-4636190af475"
     },
     {
       id: 3,
@@ -33,6 +35,7 @@ export default function Blogs() {
       date: "March 20, 2023",
       readTime: "5 min read",
       categories: ["TypeScript", "Architecture"],
+      image: "photo-1461749280684-dccba630e2f6"
     },
   ];
 
@@ -67,27 +70,44 @@ export default function Blogs() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="border border-border rounded-xl p-6 hover:bg-card/60 transition-colors"
+              className="border border-border rounded-xl p-6 hover:bg-card/60 transition-colors flex"
             >
-              <h3 className="text-xl font-bold mb-2">{blog.title}</h3>
-              <p className="text-muted-foreground mb-4">{blog.excerpt}</p>
-              <div className="flex flex-wrap items-center justify-between">
-                <div className="flex space-x-4 text-sm text-muted-foreground mb-2 sm:mb-0">
-                  <div className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    <span>{blog.date}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Clock className="w-4 h-4 mr-1" />
-                    <span>{blog.readTime}</span>
-                  </div>
+              <div className="flex-shrink-0 mr-6 hidden sm:block">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden bg-secondary/50 relative">
+                  {blog.image ? (
+                    <img 
+                      src={`https://images.unsplash.com/${blog.image}?auto=format&fit=crop&w=300&q=80`}
+                      alt={blog.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center w-full h-full">
+                      <Image className="w-8 h-8 text-muted-foreground" />
+                    </div>
+                  )}
                 </div>
-                <div className="flex flex-wrap">
-                  {blog.categories.map((category) => (
-                    <Badge key={category} variant="secondary" className="mr-2 mb-2">
-                      {category}
-                    </Badge>
-                  ))}
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold mb-2">{blog.title}</h3>
+                <p className="text-muted-foreground mb-4">{blog.excerpt}</p>
+                <div className="flex flex-wrap items-center justify-between">
+                  <div className="flex space-x-4 text-sm text-muted-foreground mb-2 sm:mb-0">
+                    <div className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      <span>{blog.date}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="w-4 h-4 mr-1" />
+                      <span>{blog.readTime}</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap">
+                    {blog.categories.map((category) => (
+                      <Badge key={category} variant="secondary" className="mr-2 mb-2">
+                        {category}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>

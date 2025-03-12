@@ -95,11 +95,13 @@
   }
 
   .conversation-bubble {
-    @apply p-4 rounded-xl text-left mb-4 break-words;
+    @apply p-4 rounded-xl text-left mb-4;
     max-width: 100%;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    word-break: break-word;
     hyphens: auto;
+    white-space: pre-wrap;
   }
 
   .user-bubble {
