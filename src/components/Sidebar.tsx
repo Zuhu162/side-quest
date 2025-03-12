@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { NavItem } from "./NavItem";
 import { toast } from "sonner";
+import Logo from "/Logo.svg";
 
 export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -108,7 +109,7 @@ export default function Sidebar() {
         <div className="flex items-center justify-between p-3 border-b border-border">
           <div className="w-full flex justify-center">
             <button onClick={toggleSidebar}>
-              <img className="h-25 w-25" src="/Logo.svg"></img>
+              <img className="h-25 w-25" src={Logo}></img>
             </button>
           </div>
           {isExpanded && (

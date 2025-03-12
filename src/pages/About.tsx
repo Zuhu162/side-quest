@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import TypingAnimation from "@/components/TypingAnimation";
 import { useState } from "react";
 import TechBadge from "@/components/TechBadge";
+import UTMlogo from "/utm-logo.png";
 
 export default function About() {
   const [typingComplete, setTypingComplete] = useState(false);
@@ -55,7 +56,7 @@ export default function About() {
             <a href="https://www.utm.my/" target="#blank">
               <div className="w-24 h-24 object-contain rounded-lg hover:-translate-y-2 duration-150 ease-in-out">
                 <img
-                  src="/utm-logo.png"
+                  src={UTMlogo}
                   alt="UTM Logo"
                   className="w-24 h-24 object-contain rounded-lg"
                 />

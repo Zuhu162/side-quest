@@ -3,6 +3,10 @@ import { motion } from "framer-motion";
 import TypingAnimation from "@/components/TypingAnimation";
 import ProjectCard from "@/components/ProjectCard";
 import ProjectSkeleton from "@/components/ProjectSkeleton";
+import gradify from "/projects/gradify.png";
+import rapidkl from "/projects/rapidkl.png";
+import utmtt from "/projects/utmtt.png";
+import epic from "/projects/epic.png";
 
 const projectsData = [
   {
@@ -11,7 +15,7 @@ const projectsData = [
     description:
       "A web-based platform built with Angular 19 & ASP.NET Core to simplify assignment submission & grading.",
     technologies: ["AngularJS", "ASP.NET", "Tailwind CSS", "TypeScript", "C#"],
-    image: "/projects/gradify.png",
+    image: gradify,
     backgroundColor: "bg-indigo-100",
     code: "https://github.com/Zuhu162/Gradify",
   },
@@ -21,7 +25,7 @@ const projectsData = [
     description:
       "A node-edge based animated path visualization system for RapidKL, that uses the A*/Djikstra's algorithm to find the shortest path between two stations",
     technologies: ["ReactJS", "TypeScript", "Pathfinding Algorithms"],
-    image: "/projects/rapidkl.png",
+    image: rapidkl,
     backgroundColor: "bg-white",
     code: "https://github.com/Zuhu162/AStar-MRT-PathFinder",
     live: "https://zuhu162.github.io/AStar-MRT-PathFinder/",
@@ -32,7 +36,7 @@ const projectsData = [
     description:
       "Faculty of Computing - Lecturer and Student Course and Timetable System using FK UTM's API",
     technologies: ["NextJS", "Tailwind CSS"],
-    image: "/projects/utmtt.png",
+    image: rapidkl,
     backgroundColor: "bg-white",
     code: "https://github.com/Zuhu162/UTMFC-Timetable",
     live: "https://utmfc-timetable.vercel.app/",
@@ -43,7 +47,7 @@ const projectsData = [
     description:
       "Faculty of Computing - Lecturer and Student Course and Timetable System using FK UTM's API",
     technologies: ["ReactJS", "Material-UI"],
-    image: "/projects/epic.png",
+    image: epic,
     backgroundColor: "bg-stone-950",
     code: "https://github.com/Zuhu162/epicgames-clone",
     live: "https://vigorous-montalcini-7eef92.netlify.app/",

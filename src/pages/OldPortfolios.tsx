@@ -5,13 +5,16 @@ import { Sparkles } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
 import ProjectSkeleton from "@/components/ProjectSkeleton";
 
+import v2 from "/oldSites/2.png";
+import v1 from "/oldSites/1.png";
+
 const projectsData = [
   {
     id: 1,
     title: "V2 (2023-2025)",
     description:
       "Made using NextJS, Tailwind, DaisyUI, Framer Motion and a bunch of 3rd party libraries",
-    image: "/oldSites/2.JPG",
+    image: v2,
     technologies: ["NextJS", "DaisyUI", "Framer"],
     backgroundColor: "violet-100",
     live: "https://zuhu162.github.io/portfolio/",
@@ -21,7 +24,7 @@ const projectsData = [
     title: "V1 (2019-2023)",
     description:
       "My first ever portfolio which landed me my first Software gig. Made using React paired with Material UI and a lot of heart",
-    image: "/oldSites/1.JPG",
+    image: v1,
     backgroundColor: "white",
     technologies: ["ReactJS", "MUI"],
     live: "https://zuhu162.github.io/portfolio/",
