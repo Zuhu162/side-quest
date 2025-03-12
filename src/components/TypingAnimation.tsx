@@ -19,6 +19,13 @@ export default function TypingAnimation({
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
+    // Reset state when text changes
+    setDisplayedText("");
+    setCurrentIndex(0);
+    setIsComplete(false);
+  }, [text]);
+
+  useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
         setDisplayedText((prev) => prev + text[currentIndex]);
@@ -33,9 +40,11 @@ export default function TypingAnimation({
   }, [currentIndex, text, typingSpeed, onComplete, isComplete]);
 
   return (
-    <div className={`flex items-center ${className}`}>
-      <span className="typing-text">{displayedText}</span>
-      {currentIndex < text.length && <span className="typing-cursor"></span>}
+    <div className={`flex items-start ${className}`}>
+      <div className="typing-text whitespace-pre-wrap break-words w-full">
+        {displayedText}
+        {currentIndex < text.length && <span className="typing-cursor"></span>}
+      </div>
     </div>
   );
 }
