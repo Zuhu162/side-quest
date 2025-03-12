@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 8%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 0.75rem;
+  }
+
+  .light {
+    --background: 40 30% 96%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 98%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 40 20% 92%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 40 20% 92%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 40 20% 92%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --sidebar-background: 40 30% 80%; /* Creamy, slightly darker background */
+    --sidebar-foreground: 40 20% 25%; /* Darker cream for text */
+    --sidebar-primary: 40 40% 50%; /* Medium creamy tone for primary elements */
+    --sidebar-primary-foreground: 0 0% 98%; /* Light text for primary elements */
+    --sidebar-accent: 40 30% 70%; /* Lighter creamy tone for accents */
+    --sidebar-accent-foreground: 40 20% 25%; /* Darker cream for accent text */
+    --sidebar-border: 40 20% 60%; /* Darker creamy tone for borders */
+    --sidebar-ring: 40 40% 50%; /* Medium creamy tone for focus rings */
+  }
+  * {
+    @apply border-border selection:bg-white/10 selection:text-white;
+  }
+
+  .dark {
+    ::selection {
+      @apply bg-white/10 text-white;
+    }
+  }
+
+  .light {
+    ::selection {
+      @apply bg-primary/20 text-primary;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-purple-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent leading-loose;
+    padding-bottom: 0.5em; /* Using em instead of fixed units for better scaling with font size */
+  }
+
+  .project-card {
+    @apply bg-card/80 backdrop-blur-md border border-white/10 rounded-xl hover:shadow-lg transition-all duration-300;
+  }
+
+  .typing-cursor {
+    @apply h-4 w-[1px] ml-1 bg-foreground animate-blink;
+  }
+
+  .typing-text {
+    @apply overflow-hidden whitespace-nowrap inline-block;
+  }
+
+  .conversation-bubble {
+    @apply p-4 rounded-xl text-left mb-4;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    white-space: pre-wrap;
+  }
+
+  .user-bubble {
+    @apply bg-card conversation-bubble;
+  }
+
+  .ai-bubble {
+    @apply bg-secondary/30 conversation-bubble;
+  }
+
+  .skill-badge {
+    @apply text-xs font-medium rounded-full px-3 py-1 m-1 inline-block;
+  }
+}
