@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: process.env.NODE_ENV === "production" ? "/side-quest" : "/",
+  base: "/side-quest/", // <- Fixed with trailing slash and no conditional
 
   server: {
     host: "::",
