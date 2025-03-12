@@ -118,7 +118,7 @@ export default function Sidebar() {
               variant="ghost"
               size="icon"
               onClick={toggleSidebar}
-              className="rounded-full w-8 h-8">
+              className="rounded-full w-10 h-10">
               <ChevronLeft />
             </Button>
           )}
