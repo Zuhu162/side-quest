@@ -107,10 +107,10 @@ export default function Sidebar() {
             ? { x: isSidebarHidden ? "-100%" : 0, width: 256 }
             : { x: 0, width: isExpanded ? 256 : 70 }
         }>
-        <div className="flex items-center justify-between p-3 border-b border-border">
+        <div className="flex items-center justify-between p-2 border-b border-border">
           <div className="w-full flex justify-center">
             <button onClick={toggleSidebar}>
-              <img className="h-14 w-14" src={Logo}></img>
+              <img className="w-14" src={Logo}></img>
             </button>
           </div>
           {isExpanded && (
