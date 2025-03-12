@@ -14,6 +14,7 @@ import {
   Linkedin,
   Mail,
   Check,
+  ChevronLeft,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -109,7 +110,7 @@ export default function Sidebar() {
         <div className="flex items-center justify-between p-3 border-b border-border">
           <div className="w-full flex justify-center">
             <button onClick={toggleSidebar}>
-              <img className="h-25 w-25" src={Logo}></img>
+              <img className="h-14 w-14" src={Logo}></img>
             </button>
           </div>
           {isExpanded && (
@@ -117,8 +118,8 @@ export default function Sidebar() {
               variant="ghost"
               size="icon"
               onClick={toggleSidebar}
-              className="rounded-full">
-              <X className="h-5 w-5" />
+              className="rounded-full w-8 h-8">
+              <ChevronLeft />
             </Button>
           )}
         </div>

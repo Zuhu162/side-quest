@@ -27,8 +27,8 @@ const searchSuggestions = [
     path: "/experience",
   },
   {
-    label: "What technologies do you use?",
-    path: "/about",
+    label: "Do you write blogs?",
+    path: "/blogs",
   },
 ];
 

@@ -7,6 +7,7 @@ import gradify from "/projects/gradify.png";
 import rapidkl from "/projects/rapidkl.png";
 import utmtt from "/projects/utmtt.png";
 import epic from "/projects/epic.png";
+import afubot from "/projects/afubot.png";
 
 const projectsData = [
   {
@@ -43,6 +44,16 @@ const projectsData = [
   },
   {
     id: 4,
+    title: "AFUbot Landing 🤖",
+    description:
+      "Landing page for AFUbot, our university food delivery robot. Powered by ThreeJS",
+    technologies: ["ReactJS", "ThreeJS"],
+    image: afubot,
+    backgroundColor: "bg-black",
+    live: "https://afubot.netlify.app/",
+  },
+  {
+    id: 5,
     title: "Epic Games Clone 🎮",
     description: "Faithful clone of the Epic Games Store UI",
     technologies: ["ReactJS", "Material-UI"],
