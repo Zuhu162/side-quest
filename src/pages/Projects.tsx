@@ -44,8 +44,7 @@ const projectsData = [
   {
     id: 4,
     title: "Epic Games Clone 🎮",
-    description:
-      "Faculty of Computing - Lecturer and Student Course and Timetable System using FK UTM's API",
+    description: "Faithful clone of the Epic Games Store UI",
     technologies: ["ReactJS", "Material-UI"],
     image: epic,
     backgroundColor: "bg-stone-950",
