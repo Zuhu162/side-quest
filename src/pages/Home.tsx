@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="container flex items-center justify-center min-h-[calc(100vh-56px)]">
+    <div className="container flex items-center justify-center min-h-[calc(100vh-200px)]">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -21,7 +21,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="absolute -bottom-16 right-0 md:right-0 max-w-xs"
+          className="absolute -top-16 right-0 md:right-0 max-w-xs"
         >
           <div className="bg-secondary p-4 rounded-xl text-sm text-left">
             <p>
