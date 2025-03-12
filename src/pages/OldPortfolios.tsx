@@ -17,7 +17,7 @@ const projectsData = [
     image: v2,
     technologies: ["NextJS", "DaisyUI", "Framer"],
     backgroundColor: "violet-100",
-    live: "https://zuhu162.github.io/portfolio/",
+    live: "https://zuhu162.github.io/portfolio-z/",
   },
   {
     id: 2,
