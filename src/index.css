@@ -54,14 +54,14 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-    --sidebar-background: 40 30% 80%; /* Creamy, slightly darker background */
-    --sidebar-foreground: 40 20% 25%; /* Darker cream for text */
-    --sidebar-primary: 40 40% 50%; /* Medium creamy tone for primary elements */
-    --sidebar-primary-foreground: 0 0% 98%; /* Light text for primary elements */
-    --sidebar-accent: 40 30% 70%; /* Lighter creamy tone for accents */
-    --sidebar-accent-foreground: 40 20% 25%; /* Darker cream for accent text */
-    --sidebar-border: 40 20% 60%; /* Darker creamy tone for borders */
-    --sidebar-ring: 40 40% 50%; /* Medium creamy tone for focus rings */
+    --sidebar-background: 42 50% 85%; /* Warm gold base */
+    --sidebar-foreground: 42 30% 25%; /* Darker gold-brown for text */
+    --sidebar-primary: 42 60% 40%; /* Rich golden highlight */
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 42 70% 50%; /* Brighter gold for accents */
+    --sidebar-accent-foreground: 0 0% 15%; /* Darker text on accents */
+    --sidebar-border: 42 30% 60%; /* Subtle golden border */
+    --sidebar-ring: 42 60% 50%; /* Gold-toned focus ring */
   }
   * {
     @apply border-border selection:bg-white/10 selection:text-white;

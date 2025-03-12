@@ -109,7 +109,9 @@ export default function Sidebar() {
         }>
         <div className="flex items-center justify-between p-2 border-b border-border">
           <div className="w-full flex justify-center">
-            <button onClick={toggleSidebar}>
+            <button
+              className="w-14 bg-backdrop-blur-sm"
+              onClick={toggleSidebar}>
               <img className="w-14" src={Logo}></img>
             </button>
           </div>

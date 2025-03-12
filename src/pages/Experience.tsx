@@ -63,6 +63,31 @@ export default function Experience() {
             <div className="absolute -left-3 top-0 w-6 h-6 bg-secondary rounded-full flex items-center justify-center">
               <Briefcase className="w-3 h-3" />
             </div>
+            <div>
+              <div className="flex items-center text-sm text-muted-foreground mb-2">
+                <Calendar className="w-4 h-4 mr-2" />
+                <span>Jan 2023 - Feb 2024</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Software Engineer</h3>
+              <div className="flex gap-2">
+                <p className="text-muted-foreground">AFUBot</p>
+                <TechBadge label="Johor, Malaysia" />
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Built a control panel for a Food devlivery robot using ReactJS
+                and NodeJS as well as working in a cross-functional team of
+                engineers across multiple disciplines to build a functional
+                robot for our university. Additionally also built a website
+                using ThreeJS to create a visually stunning landing page with a
+                3D model of the robot made with AutoCAD.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative border-l border-border pl-6 ml-3">
+            <div className="absolute -left-3 top-0 w-6 h-6 bg-secondary rounded-full flex items-center justify-center">
+              <Briefcase className="w-3 h-3" />
+            </div>
             <div className="mb-6">
               <div className="flex items-center text-sm text-muted-foreground mb-2">
                 <Calendar className="w-4 h-4 mr-2" />
@@ -81,31 +106,6 @@ export default function Experience() {
                 Worked in a dynamic team of developers and designers to launch
                 CyberProtekt, a security testing app integrated into the
                 company’s main website, which now serves 76+ companies.
-              </p>
-            </div>
-          </div>
-
-          <div className="relative border-l border-border pl-6 ml-3">
-            <div className="absolute -left-3 top-0 w-6 h-6 bg-secondary rounded-full flex items-center justify-center">
-              <Briefcase className="w-3 h-3" />
-            </div>
-            <div>
-              <div className="flex items-center text-sm text-muted-foreground mb-2">
-                <Calendar className="w-4 h-4 mr-2" />
-                <span>Jan 2024 - Dec 2024</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Software Engineer</h3>
-              <div className="flex gap-2">
-                <p className="text-muted-foreground">AFUBot</p>
-                <TechBadge label="Johor, Malaysia" />
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Built a control panel for a Food devlivery robot using ReactJS
-                and NodeJS as well as working in a cross-functional team of
-                engineers across multiple disciplines to build a functional
-                robot for our university. Additionally also built a website
-                using ThreeJS to create a visually stunning landing page with a
-                3D model of the robot made with AutoCAD.
               </p>
             </div>
           </div>

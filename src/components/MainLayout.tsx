@@ -71,7 +71,7 @@ export default function MainLayout() {
             : "ml-0"
         }`}>
         {/* Top navigation */}
-        <header className="sticky top-0 z-30 border-b border-border h-16 flex justify-between items-center px-4 sm:px-6 bg-background/80 backdrop-blur-sm">
+        <header className="sticky top-0 z-30 border-b border-border h-16 flex justify-between items-center px-4 sm:px-6 bg-sidebar backdrop-blur-sm">
           {/* Left Side: GitHub and Résumé Links */}
           <div className="flex items-center">
             <a target="_blank" href="https://github.com/Zuhu162">
