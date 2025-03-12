@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/side-quest/", // <- Fixed with trailing slash and no conditional
+  base: "/", // <- Fixed with trailing slash and no conditional
 
   server: {
     host: "::",
