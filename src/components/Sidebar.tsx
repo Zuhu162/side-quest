@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { NavItem } from "./NavItem";
 import { toast } from "sonner";
-import Logo from "/Logo.svg";
+import Logo from "/Logo.png";
 
 export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
