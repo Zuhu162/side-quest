@@ -8,38 +8,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
-
-type NavItemProps = {
-  icon: React.ReactNode;
-  label: string;
-  to: string;
-  isNew?: boolean;
-  onClick?: () => void;
-};
-
-const NavItem = ({ icon, label, to, isNew, onClick }: NavItemProps) => (
-  <NavLink 
-    to={to} 
-    className={({ isActive }) => `
-      flex items-center p-2 rounded-lg transition-all
-      ${isActive ? "bg-secondary text-foreground" : "text-muted-foreground hover:bg-secondary/50"}
-      justify-start
-    `}
-    onClick={onClick}
-  >
-    <div className="flex items-center">
-      <div className="w-5 h-5">{icon}</div>
-      <span className="ml-3 text-sm whitespace-nowrap">
-        {label}
-        {isNew && (
-          <span className="ml-2 bg-blue-500 text-white text-xs px-1.5 py-0.5 rounded-full">
-            NEW
-          </span>
-        )}
-      </span>
-    </div>
-  </NavLink>
-);
+import { NavItem } from "./NavItem";
 
 export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -65,6 +34,14 @@ export default function Sidebar() {
   const handleOverlayClick = () => {
     if (isMobile) {
       setIsSidebarHidden(true);
+    }
+  };
+
+  const toggleSidebar = () => {
+    if (isMobile) {
+      setIsSidebarHidden(true);
+    } else {
+      setIsExpanded(!isExpanded);
     }
   };
 
@@ -96,15 +73,15 @@ export default function Sidebar() {
         animate={
           isMobile 
             ? { x: isSidebarHidden ? "-100%" : 0, width: 256 }
-            : { x: 0, width: isExpanded ? 256 : 64 }
+            : { x: 0, width: isExpanded ? 256 : 70 }
         }
       >
         <div className="flex items-center justify-between p-4 border-b border-border">
-          <h2 className="text-lg font-semibold">Main Menu</h2>
+          {isExpanded && <h2 className="text-lg font-semibold">Main Menu</h2>}
           <Button 
             variant="ghost" 
             size="icon" 
-            onClick={() => isMobile ? setIsSidebarHidden(true) : setIsExpanded(!isExpanded)}
+            onClick={toggleSidebar}
             className="rounded-full"
           >
             <X className="h-5 w-5" />
@@ -117,19 +94,23 @@ export default function Sidebar() {
             label="Home" 
             to="/" 
             onClick={handleNavLinkClick}
+            isExpanded={isExpanded}
           />
 
-          <div className="pt-4 pb-2">
-            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              CONVERSATIONS
+          {isExpanded && (
+            <div className="pt-4 pb-2">
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                CONVERSATIONS
+              </div>
             </div>
-          </div>
+          )}
 
           <NavItem 
             icon={<User className="h-5 w-5" />} 
             label="About Me" 
             to="/about" 
             onClick={handleNavLinkClick}
+            isExpanded={isExpanded}
           />
           
           <NavItem 
@@ -137,6 +118,7 @@ export default function Sidebar() {
             label="Projects" 
             to="/projects" 
             onClick={handleNavLinkClick}
+            isExpanded={isExpanded}
           />
           
           <NavItem 
@@ -144,6 +126,7 @@ export default function Sidebar() {
             label="Experience" 
             to="/experience" 
             onClick={handleNavLinkClick}
+            isExpanded={isExpanded}
           />
           
           <NavItem 
@@ -151,6 +134,7 @@ export default function Sidebar() {
             label="Blogs" 
             to="/blogs" 
             onClick={handleNavLinkClick}
+            isExpanded={isExpanded}
           />
           
           <NavItem 
@@ -159,13 +143,28 @@ export default function Sidebar() {
             to="/portfolio-generator" 
             onClick={handleNavLinkClick}
             isNew={true}
+            isExpanded={isExpanded}
           />
         </div>
 
         <div className="p-4 border-t border-border">
-          <div className="text-sm text-muted-foreground">
-            <p className="mb-2">Connect with me</p>
-            <div className="flex space-x-2">
+          {isExpanded ? (
+            <div className="text-sm text-muted-foreground">
+              <p className="mb-2">Connect with me</p>
+              <div className="flex space-x-2">
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <Github className="h-5 w-5" />
+                </Button>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <Linkedin className="h-5 w-5" />
+                </Button>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <Mail className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center space-y-2">
               <Button variant="ghost" size="icon" className="rounded-full">
                 <Github className="h-5 w-5" />
               </Button>
@@ -176,7 +175,7 @@ export default function Sidebar() {
                 <Mail className="h-5 w-5" />
               </Button>
             </div>
-          </div>
+          )}
         </div>
       </motion.div>
     </>

@@ -10,18 +10,11 @@ export default function Home() {
         transition={{ duration: 0.5 }}
         className="max-w-3xl mx-auto text-center relative"
       >
-        <h1 className="text-4xl md:text-6xl font-bold text-gradient mb-4">
-          Zuhayer Adnan Siddique
-        </h1>
-        <h2 className="text-xl md:text-2xl text-muted-foreground mb-8">
-          Software Engineer
-        </h2>
-        
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="absolute -top-16 right-0 md:right-0 max-w-xs"
+          className="absolute -top-28 right-0 md:right-0 max-w-xs"
         >
           <div className="bg-secondary p-4 rounded-xl text-sm text-left">
             <p>
@@ -29,6 +22,13 @@ export default function Home() {
             </p>
           </div>
         </motion.div>
+        
+        <h1 className="text-4xl md:text-6xl font-bold text-gradient mb-4">
+          Zuhayer Adnan Siddique
+        </h1>
+        <h2 className="text-xl md:text-2xl text-muted-foreground mb-8">
+          Software Engineer
+        </h2>
       </motion.div>
     </div>
   );

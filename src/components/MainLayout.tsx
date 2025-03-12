@@ -59,7 +59,7 @@ export default function MainLayout() {
         className={`flex-1 flex flex-col w-full transition-all duration-300 ${
           isMobile ? 'ml-0' : 
           sidebarState === "expanded" ? 'ml-64' : 
-          sidebarState === "collapsed" ? 'ml-16' : 'ml-0'
+          sidebarState === "collapsed" ? 'ml-[70px]' : 'ml-0'
         }`}
       >
         {/* Top navigation */}
