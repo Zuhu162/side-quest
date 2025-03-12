@@ -36,7 +36,7 @@ const projectsData = [
     description:
       "Faculty of Computing - Lecturer and Student Course and Timetable System using FK UTM's API",
     technologies: ["NextJS", "Tailwind CSS"],
-    image: rapidkl,
+    image: utmtt,
     backgroundColor: "bg-white",
     code: "https://github.com/Zuhu162/UTMFC-Timetable",
     live: "https://utmfc-timetable.vercel.app/",
