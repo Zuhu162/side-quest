@@ -98,7 +98,7 @@ export default function MainLayout() {
           </div>
         </header>
 
-        {/* Main content with conversation interface - added top padding to account for fixed header */}
+        {/* Main content with conversation interface */}
         <div className="w-full h-full">
           <ConversationInterface currentPath={location.pathname}>
             <Outlet />
