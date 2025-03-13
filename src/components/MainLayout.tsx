@@ -72,8 +72,9 @@ export default function MainLayout() {
             ? "ml-[70px]"
             : "ml-0"
         }`}>
-        {/* Top navigation - now full width using fixed positioning */}
-        <header className="fixed top-0 z-30 border-b border-border h-16 flex justify-between items-center px-4 sm:px-6 bg-sidebar backdrop-blur-sm right-0 transition-all duration-300"
+        {/* Top navigation - using fixed positioning with dynamic left value */}
+        <header 
+          className="fixed top-0 z-30 border-b border-border h-16 flex justify-between items-center px-4 sm:px-6 bg-background/80 backdrop-blur-sm right-0 transition-all duration-300"
           style={{
             left: isMobile 
               ? "0" 

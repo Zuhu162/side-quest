@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -129,6 +129,7 @@ export default function ConversationInterface({ children, currentPath }: Convers
   const [isTyping, setIsTyping] = useState(false);
   const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
   const [conversation, setConversation] = useState<{question: string, answer: string}[]>([]);
+  const conversationEndRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   // Update questions when path changes
@@ -142,6 +143,13 @@ export default function ConversationInterface({ children, currentPath }: Convers
     setAskedQuestions([]);
     setConversation([]);
   }, [currentPath]);
+
+  // Auto-scroll to the bottom when new messages are added
+  useEffect(() => {
+    if (conversationEndRef.current) {
+      conversationEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [conversation, isTyping]); // Scroll when conversation changes or typing status changes
 
   const handleSuggestionClick = (item: Question) => {
     setSearchValue("");
@@ -199,6 +207,8 @@ export default function ConversationInterface({ children, currentPath }: Convers
             </div>
           </div>
         ))}
+        {/* Invisible element to scroll to */}
+        <div ref={conversationEndRef} />
       </div>
 
       {/* Fixed chat input at bottom */}
