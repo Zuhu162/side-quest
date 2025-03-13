@@ -1,5 +1,6 @@
+
 import { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { ThemeToggle } from "./ThemeToggle";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -12,6 +13,7 @@ export default function MainLayout() {
     "expanded" | "collapsed" | "hidden"
   >("expanded");
   const isMobile = useIsMobile();
+  const location = useLocation();
 
   // Watch for sidebar state changes by checking element width
   useEffect(() => {
@@ -70,8 +72,8 @@ export default function MainLayout() {
             ? "ml-[70px]"
             : "ml-0"
         }`}>
-        {/* Top navigation */}
-        <header className="sticky top-0 z-30 border-b border-border h-16 flex justify-between items-center px-4 sm:px-6 bg-sidebar backdrop-blur-sm">
+        {/* Top navigation - now full width */}
+        <header className="sticky top-0 z-30 border-b border-border h-16 flex justify-between items-center px-4 sm:px-6 bg-sidebar backdrop-blur-sm w-full">
           {/* Left Side: GitHub and Résumé Links */}
           <div className="flex items-center">
             <a target="_blank" href="https://github.com/Zuhu162">
@@ -97,7 +99,7 @@ export default function MainLayout() {
         </header>
 
         {/* Main content with conversation interface */}
-        <ConversationInterface>
+        <ConversationInterface currentPath={location.pathname}>
           <Outlet />
         </ConversationInterface>
       </div>
