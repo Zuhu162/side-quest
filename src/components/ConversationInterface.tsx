@@ -16,8 +16,21 @@ interface ConversationProps {
   currentPath: string;
 }
 
+// Define question types
+interface NavigationQuestion {
+  label: string;
+  path: string;
+}
+
+interface ResponseQuestion {
+  label: string;
+  response: string;
+}
+
+type Question = NavigationQuestion | ResponseQuestion;
+
 // Define page-specific questions
-const pageQuestions = {
+const pageQuestions: Record<string, Question[]> = {
   "/": [
     {
       label: "Show me your projects",
@@ -110,31 +123,49 @@ const pageQuestions = {
 
 export default function ConversationInterface({ children, currentPath }: ConversationProps) {
   const [searchValue, setSearchValue] = useState("");
-  const [currentQuestions, setCurrentQuestions] = useState(pageQuestions["/"]);
+  const [currentQuestions, setCurrentQuestions] = useState<Question[]>(pageQuestions["/"] || []);
   const [selectedQuestion, setSelectedQuestion] = useState<string | null>(null);
   const [selectedResponse, setSelectedResponse] = useState<string | null>(null);
   const [isTyping, setIsTyping] = useState(false);
+  const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
+  const [conversation, setConversation] = useState<{question: string, answer: string}[]>([]);
   const navigate = useNavigate();
 
   // Update questions when path changes
   useEffect(() => {
     const pathQuestions = pageQuestions[currentPath as keyof typeof pageQuestions] || pageQuestions["/"];
-    setCurrentQuestions(pathQuestions);
+    setCurrentQuestions(pathQuestions.filter(q => !askedQuestions.includes(q.label)));
     // Reset states when changing pages
     setSelectedQuestion(null);
     setSelectedResponse(null);
     setIsTyping(false);
+    setAskedQuestions([]);
+    setConversation([]);
   }, [currentPath]);
 
-  const handleSuggestionClick = (item: any) => {
-    if (currentPath === "/" || "path" in item) {
+  const handleSuggestionClick = (item: Question) => {
+    setSearchValue("");
+    
+    if ('path' in item) {
       navigate(item.path);
     } else {
+      // Add question to asked questions list
+      setAskedQuestions(prev => [...prev, item.label]);
+      
+      // Remove this question from available questions
+      setCurrentQuestions(currentQuestions.filter(q => q.label !== item.label));
+      
+      // Set this as the current question/response
       setSelectedQuestion(item.label);
       setIsTyping(true);
       setSelectedResponse(item.response);
+      
+      // Add to conversation
+      setConversation(prev => [...prev, {
+        question: item.label,
+        answer: item.response
+      }]);
     }
-    setSearchValue("");
   };
 
   const handleTypingComplete = () => {
@@ -147,29 +178,27 @@ export default function ConversationInterface({ children, currentPath }: Convers
       <div className="flex-1 overflow-y-auto py-8 px-4 sm:px-6">
         {children}
         
-        {/* Display selected question and response */}
-        {selectedQuestion && (
-          <div className="max-w-3xl mx-auto mt-8">
+        {/* Display conversation history */}
+        {conversation.map((item, index) => (
+          <div key={index} className="max-w-3xl mx-auto mt-8">
             <div className="bg-card p-4 rounded-xl text-right">
               <div className="text-sm">
-                <span className="text-muted-foreground">{selectedQuestion}</span>
+                <span className="text-muted-foreground">{item.question}</span>
               </div>
             </div>
             
-            {selectedResponse && (
-              <div className="bg-secondary/30 p-4 rounded-xl text-left mt-4">
-                {isTyping ? (
-                  <TypingAnimation
-                    text={selectedResponse}
-                    onComplete={handleTypingComplete}
-                  />
-                ) : (
-                  <div>{selectedResponse}</div>
-                )}
-              </div>
-            )}
+            <div className="bg-secondary/30 p-4 rounded-xl text-left mt-4">
+              {index === conversation.length - 1 && isTyping ? (
+                <TypingAnimation
+                  text={item.answer}
+                  onComplete={handleTypingComplete}
+                />
+              ) : (
+                <div>{item.answer}</div>
+              )}
+            </div>
           </div>
-        )}
+        ))}
       </div>
 
       {/* Fixed chat input at bottom */}
@@ -194,15 +223,21 @@ export default function ConversationInterface({ children, currentPath }: Convers
               className="w-[var(--radix-popover-trigger-width)] p-0"
               align="center">
               <div className="py-2">
-                {currentQuestions.map((suggestion, index) => (
-                  <Button
-                    key={index}
-                    variant="ghost"
-                    className="w-full justify-start text-left px-3 py-2 text-sm"
-                    onClick={() => handleSuggestionClick(suggestion)}>
-                    {suggestion.label}
-                  </Button>
-                ))}
+                {currentQuestions.length > 0 ? (
+                  currentQuestions.map((suggestion, index) => (
+                    <Button
+                      key={index}
+                      variant="ghost"
+                      className="w-full justify-start text-left px-3 py-2 text-sm"
+                      onClick={() => handleSuggestionClick(suggestion)}>
+                      {suggestion.label}
+                    </Button>
+                  ))
+                ) : (
+                  <div className="text-center py-2 text-sm text-muted-foreground">
+                    No more questions available. Try another page!
+                  </div>
+                )}
               </div>
             </PopoverContent>
           </Popover>

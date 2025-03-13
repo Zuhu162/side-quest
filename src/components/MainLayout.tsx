@@ -72,8 +72,17 @@ export default function MainLayout() {
             ? "ml-[70px]"
             : "ml-0"
         }`}>
-        {/* Top navigation - now full width */}
-        <header className="sticky top-0 z-30 border-b border-border h-16 flex justify-between items-center px-4 sm:px-6 bg-sidebar backdrop-blur-sm w-full">
+        {/* Top navigation - now full width using fixed positioning */}
+        <header className="fixed top-0 z-30 border-b border-border h-16 flex justify-between items-center px-4 sm:px-6 bg-sidebar backdrop-blur-sm right-0 transition-all duration-300"
+          style={{
+            left: isMobile 
+              ? "0" 
+              : sidebarState === "expanded" 
+                ? "256px" 
+                : sidebarState === "collapsed" 
+                  ? "70px" 
+                  : "0"
+          }}>
           {/* Left Side: GitHub and Résumé Links */}
           <div className="flex items-center">
             <a target="_blank" href="https://github.com/Zuhu162">
@@ -98,10 +107,12 @@ export default function MainLayout() {
           </div>
         </header>
 
-        {/* Main content with conversation interface */}
-        <ConversationInterface currentPath={location.pathname}>
-          <Outlet />
-        </ConversationInterface>
+        {/* Main content with conversation interface - added top padding to account for fixed header */}
+        <div className="pt-16 w-full h-full">
+          <ConversationInterface currentPath={location.pathname}>
+            <Outlet />
+          </ConversationInterface>
+        </div>
       </div>
     </div>
   );
