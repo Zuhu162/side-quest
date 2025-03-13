@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
@@ -7,6 +6,24 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import ConversationInterface from "./ConversationInterface";
 import { Button } from "./ui/button";
 import { Github, Link } from "lucide-react";
+
+// Updated component for the fake header extension with precise border alignment
+const HeaderExtension = ({ sidebarState, isMobile }) => {
+  // Only show this when sidebar is visible
+  if (isMobile || sidebarState === "hidden") return null;
+
+  return (
+    <div
+      className={`fixed top-0 left-0 z-10 h-16 bg-background transition-all duration-300 ${
+        sidebarState === "expanded" ? "w-64" : "w-[70px]"
+      }`}
+      style={{
+        borderBottom: "1px solid var(--border)", // Use CSS variable for border color
+        boxSizing: "border-box", // Ensure border is included in the height calculation
+      }}
+    />
+  );
+};
 
 export default function MainLayout() {
   const [sidebarState, setSidebarState] = useState<
@@ -60,6 +77,10 @@ export default function MainLayout() {
 
   return (
     <div className="min-h-screen flex bg-background">
+      {/* Add the fake header extension */}
+      <HeaderExtension sidebarState={sidebarState} isMobile={isMobile} />
+
+      {/* Original sidebar */}
       <Sidebar />
 
       <div
@@ -73,7 +94,7 @@ export default function MainLayout() {
             : "ml-0"
         }`}>
         {/* Top navigation */}
-        <header className="border-b border-border h-16 flex justify-between items-center px-4 sm:px-6 bg-background">
+        <header className="sticky top-0 z-20 border-b border-border h-16 flex justify-between items-center px-4 sm:px-6 bg-background">
           {/* Left Side: GitHub and Résumé Links */}
           <div className="flex items-center">
             <a target="_blank" href="https://github.com/Zuhu162">
@@ -98,7 +119,7 @@ export default function MainLayout() {
           </div>
         </header>
 
-        {/* Main content with conversation interface - added top padding to account for fixed header */}
+        {/* Main content with conversation interface */}
         <div className="w-full h-full">
           <ConversationInterface currentPath={location.pathname}>
             <Outlet />
