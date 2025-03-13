@@ -44,7 +44,7 @@ export default function Experience() {
                 <span>Jan 2024 - Jul 2024</span>
               </div>
               <h3 className="text-xl font-bold mb-2">Wev Developer</h3>
-              <div className="flex gap-2">
+              <div className="block md:flex gap-2">
                 <p className="text-muted-foreground mb-2">
                   Summer Digital Agency
                 </p>
@@ -69,7 +69,7 @@ export default function Experience() {
                 <span>Jan 2023 - Feb 2024</span>
               </div>
               <h3 className="text-xl font-bold mb-2">Software Engineer</h3>
-              <div className="flex gap-2">
+              <div className="block md:flex gap-2">
                 <p className="text-muted-foreground">AFUBot</p>
                 <TechBadge label="Johor, Malaysia" />
               </div>
@@ -96,7 +96,7 @@ export default function Experience() {
               <h3 className="text-xl font-bold mb-2">
                 Software Engineer Intern
               </h3>
-              <div className="flex gap-2">
+              <div className="block md:flex gap-2">
                 <p className="text-muted-foreground mb-2">
                   Ronas Network and Services
                 </p>
