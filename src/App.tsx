@@ -13,6 +13,7 @@ import Experience from "./pages/Experience";
 import Blogs from "./pages/Blogs";
 import PortfolioGenerator from "./pages/OldPortfolios";
 import NotFound from "./pages/NotFound";
+import { SidebarProvider } from "./components/SidebarContext";
 
 const queryClient = new QueryClient();
 
@@ -23,17 +24,19 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter basename={import.meta.env.BASE_URL}>
-          <Routes>
-            <Route path="/" element={<MainLayout />}>
-              <Route index element={<Home />} />
-              <Route path="about" element={<About />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="experience" element={<Experience />} />
-              <Route path="blogs" element={<Blogs />} />
-              <Route path="old-portfolios" element={<PortfolioGenerator />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
+          <SidebarProvider>
+            <Routes>
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<Home />} />
+                <Route path="about" element={<About />} />
+                <Route path="projects" element={<Projects />} />
+                <Route path="experience" element={<Experience />} />
+                <Route path="blogs" element={<Blogs />} />
+                <Route path="old-portfolios" element={<PortfolioGenerator />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </SidebarProvider>
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>

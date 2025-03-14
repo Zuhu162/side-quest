@@ -1,14 +1,22 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { ThemeToggle } from "./ThemeToggle";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useSidebar } from "./SidebarContext";
 import ConversationInterface from "./ConversationInterface";
 import { Button } from "./ui/button";
 import { Github, Link } from "lucide-react";
 
+interface HeaderExtensionProps {
+  sidebarState: "expanded" | "collapsed" | "hidden";
+  isMobile: boolean;
+}
+
 // Updated component for the fake header extension with precise border alignment
-const HeaderExtension = ({ sidebarState, isMobile }) => {
+const HeaderExtension: React.FC<HeaderExtensionProps> = ({
+  sidebarState,
+  isMobile,
+}) => {
   // Only show this when sidebar is visible
   if (isMobile || sidebarState === "hidden") return null;
 
@@ -18,62 +26,16 @@ const HeaderExtension = ({ sidebarState, isMobile }) => {
         sidebarState === "expanded" ? "w-64" : "w-[70px]"
       }`}
       style={{
-        borderBottom: "1px solid var(--border)", // Use CSS variable for border color
-        boxSizing: "border-box", // Ensure border is included in the height calculation
+        borderBottom: "1px solid var(--border)",
+        boxSizing: "border-box",
       }}
     />
   );
 };
 
-export default function MainLayout() {
-  const [sidebarState, setSidebarState] = useState<
-    "expanded" | "collapsed" | "hidden"
-  >("expanded");
-  const isMobile = useIsMobile();
+const MainLayout: React.FC = () => {
+  const { sidebarState, isMobile } = useSidebar();
   const location = useLocation();
-
-  // Watch for sidebar state changes by checking element width
-  useEffect(() => {
-    const checkSidebarState = () => {
-      const sidebarEl = document.querySelector(
-        '[class*="fixed inset-y-0 left-0"]'
-      );
-      if (!sidebarEl) return;
-
-      const rect = sidebarEl.getBoundingClientRect();
-
-      if (rect.left < 0) {
-        setSidebarState("hidden");
-      } else if (rect.width <= 70) {
-        setSidebarState("collapsed");
-      } else {
-        setSidebarState("expanded");
-      }
-    };
-
-    // Initial check
-    checkSidebarState();
-
-    // Set up a mutation observer to detect changes in the sidebar
-    const observer = new MutationObserver(checkSidebarState);
-    const sidebar = document.querySelector('[class*="fixed inset-y-0 left-0"]');
-
-    if (sidebar) {
-      observer.observe(sidebar, {
-        attributes: true,
-        attributeFilter: ["style", "class"],
-      });
-    }
-
-    // Set up resize event listener to handle window resize
-    window.addEventListener("resize", checkSidebarState);
-
-    // Clean up
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", checkSidebarState);
-    };
-  }, []);
 
   return (
     <div className="min-h-screen flex bg-background">
@@ -128,4 +90,6 @@ export default function MainLayout() {
       </div>
     </div>
   );
-}
+};
+
+export default MainLayout;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -17,64 +17,44 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { NavItem } from "./NavItem";
 import { toast } from "sonner";
 import Logo from "/Logo.png";
+import { useSidebar } from "./SidebarContext";
 
-export default function Sidebar() {
-  const [isExpanded, setIsExpanded] = useState(true);
-  const isMobile = useIsMobile();
-  const [isSidebarHidden, setIsSidebarHidden] = useState(false);
+const Sidebar: React.FC = () => {
+  const { sidebarState, toggleSidebar, isMobile } = useSidebar();
+  const isExpanded = sidebarState === "expanded";
+  const isSidebarHidden = sidebarState === "hidden";
   const navigate = useNavigate();
 
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
-    const email = "zuhayersiddique162@gmail.com"; // Your email address
+    const email = "zuhayersiddique162@gmail.com";
 
-    // Copy email to clipboard
     navigator.clipboard
       .writeText(email)
       .then(() => {
         setCopied(true);
-        setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
-
-        // Show Sonner toast
+        setTimeout(() => setCopied(false), 2000);
         toast.success(`Email: ${email} copied to your clipboard! ✔`);
       })
       .catch((error) => {
         console.error("Failed to copy email:", error);
-        toast.error("Failed to copy email."); // Show error toast
+        toast.error("Failed to copy email.");
       });
   };
 
-  useEffect(() => {
-    if (isMobile) {
-      setIsSidebarHidden(true); // Hidden by default on mobile
-    } else {
-      setIsSidebarHidden(false); // Always visible on desktop
-      setIsExpanded(true); // Always expanded on desktop
-    }
-  }, [isMobile]);
-
   const handleNavLinkClick = () => {
     if (isMobile) {
-      setIsSidebarHidden(true);
+      toggleSidebar(); // This will hide the sidebar on mobile
     }
   };
 
   const handleOverlayClick = () => {
     if (isMobile) {
-      setIsSidebarHidden(true);
-    }
-  };
-
-  const toggleSidebar = () => {
-    if (isMobile) {
-      setIsSidebarHidden(true);
-    } else {
-      setIsExpanded(!isExpanded);
+      toggleSidebar(); // This will hide the sidebar on mobile
     }
   };
 
@@ -85,7 +65,7 @@ export default function Sidebar() {
         <Button
           variant="secondary"
           size="icon"
-          onClick={() => setIsSidebarHidden(false)}
+          onClick={toggleSidebar}
           className="fixed top-20 left-4 z-50 rounded-full shadow-lg">
           <Menu className="h-15 w-15" />
         </Button>
@@ -112,7 +92,7 @@ export default function Sidebar() {
             <button
               className="w-14 h-14 p-2 bg-black rounded-xl"
               onClick={toggleSidebar}>
-              <img className="w-14" src={Logo}></img>
+              <img className="w-14" src={Logo} alt="Logo" />
             </button>
           </div>
           {isExpanded && (
@@ -246,4 +226,6 @@ export default function Sidebar() {
       </motion.div>
     </>
   );
-}
+};
+
+export default Sidebar;

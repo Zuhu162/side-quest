@@ -10,7 +10,7 @@ export default function Experience() {
     "Ah, experience—the thing everyone wants but no one wants to give you a chance to get. Luckily, I’ve gathered a fair bit! Here’s where I’ve worked and what I’ve done 😀";
 
   return (
-    <div className="container">
+    <div className="container py-8">
       <div className="max-w-3xl mx-auto space-y-4">
         <div className="bg-card p-4 rounded-xl text-left">
           <div className="text-sm text-right">
