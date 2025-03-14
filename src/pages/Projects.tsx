@@ -8,6 +8,7 @@ import rapidkl from "/projects/rapidkl.png";
 import utmtt from "/projects/utmtt.png";
 import epic from "/projects/epic.png";
 import afubot from "/projects/afubot.png";
+import comfortBot from "/projects/comfortbot.png";
 
 const projectsData = [
   {
@@ -43,6 +44,16 @@ const projectsData = [
     live: "https://utmfc-timetable.vercel.app/",
   },
   {
+    id: 5,
+    title: "ComfortBot ☪",
+    description:
+      "ComfortBot is an chat application that uses the Deepseek-R1 api and provides comfort, guidance, and wisdom based on Islamic teachings, relevant Hadiths, Quranic verses, and spiritual advice.",
+    technologies: ["ReactJS", "DeepSeek-R1-API"],
+    image: comfortBot,
+    backgroundColor: "bg-white",
+    code: "https://github.com/Zuhu162/comfortbot",
+  },
+  {
     id: 4,
     title: "AFUbot Landing 🤖",
     description:
@@ -53,7 +64,7 @@ const projectsData = [
     live: "https://afubot.netlify.app/",
   },
   {
-    id: 5,
+    id: 6,
     title: "Epic Games Clone 🎮",
     description: "Faithful clone of the Epic Games Store UI",
     technologies: ["ReactJS", "Material-UI"],
